@@ -5,10 +5,9 @@ from django_apscheduler.models import DjangoJobExecution, DjangoJob
 from apscheduler.schedulers.background import BackgroundScheduler
 
 from newsletter.models import NewsletterMessage, NewsletterLog, NewsletterSettings
-from newsletter import send_newsletter
-from newsletter.send_newsletter import my_scheduled_job
+from newsletter.send_newsletter import send_newsletter
 
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        my_scheduled_job()
+        send_newsletter()
