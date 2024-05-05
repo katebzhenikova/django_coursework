@@ -72,7 +72,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'course_work',
         'USER': 'postgres',
-        'PASSWORD': 'darling87!',
+        'PASSWORD': '12345',
         'HOST': '127.0.0.1',
         'PORT': 5432,
     }
@@ -144,7 +144,7 @@ APSCHEDULER_DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'course_work',
         'USER': 'postgres',
-        'PASSWORD': 'darling87!',
+        'PASSWORD': '12345',
         'HOST': '127.0.0.1',
         'PORT': 5432,
     }
@@ -159,7 +159,7 @@ APSCHEDULER_JOBS = {
         'interval': settings.NEWSLETTER_FREQUENCY,  # Периодичность рассылки
         'args': [],
         'kwargs': {},
-        'function': 'path.to.send_newsletter',  # Функция, которая будет вызываться для отправки рассылки
+        'function': 'path.to.run_newsletters',  # Функция, которая будет вызываться для отправки рассылки
     },
 }
 
