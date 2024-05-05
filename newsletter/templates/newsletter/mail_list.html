@@ -1,0 +1,39 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+
+    <div class="col-12 mb-5">
+        <a class="btn btn-outline-primary" href="{% url 'newsletter:create_mail' %}">Создать новую рассылку</a>
+        <a class="btn btn-outline-primary" href="{% url 'newsletter:client_list' %}">Ваши Клиенты</a>
+        <a class="btn btn-outline-primary" href="{% url 'newsletter:newslettermessage_list' %}">Ваши сообщения для рассылки</a>
+     <p></p>
+        <span class="fw-bold">Ваши рассылки</span>
+     </p>
+
+    {% for newslettersettings in newslettersettings_list %}
+
+        <div class="col">
+            <div class="card shadow-sm">
+
+              <div class="card-body">
+                <p class="card-text">
+                    Тема рассылки: <span class="fw-bold">{{ newslettersettings.message.newsletter_topic }}</span>
+                </p>
+
+                <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                    <a href="{% url 'newsletter:view_mail' newslettersettings.pk %}" type="button" class="btn btn-sm btn-outline-secondary">Просмотр</a>
+                    <a href="{% url 'newsletter:edit_mail' newslettersettings.pk %}" type="button" class="btn btn-sm btn-outline-secondary">Редактировать</a>
+                    <a href="{% url 'newsletter:delete_mail' newslettersettings.pk %}" type="button" class="btn btn-sm btn-outline-secondary">Удалить</a>
+
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    {% endfor %}
+    </div>
+
+
+{% endblock %}

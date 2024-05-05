@@ -1,0 +1,19 @@
+{% extends 'main/base.html' %}
+{% block content %}
+
+
+
+                <span class="fw-bold"> {{ newslettermessage.newsletter_topic }} </span>
+               <p>
+                </p>
+                <p class="card-text"><p>
+
+                  {{ newslettermessage.newsletter_message }}
+                <p>
+                <a href="{% url 'newsletter:newslettermessage_list' %}" class="btn btn-warning">Назад</a>
+                </p>
+
+
+
+{% endblock %}
+

@@ -1,0 +1,33 @@
+{% extends 'main/base.html' %}
+{% block content %}
+<div class="col-12">
+    <div class="row">
+        <div class="col-6">
+            <div class="card">
+                <div class="card-body">
+                    <span class="fw-bold">{{ newslettersettings|title }}</span>
+                    <p></p>
+                    <p class="card-text">
+                        <p>
+                            <p>Клиенты:</p>
+                            <ul>
+                                {% for client in newslettersettings.clients.all %}
+                                <li>{{ client.client_fullname }}</li>
+                                {% endfor %}
+                            </ul>
+                        </p>
+                        <p>Статус рассылки: {{newslettersettings.status }}</p>
+                        <p>Периодичность рассылки: {{newslettersettings.frequency }}</p>
+                        <p>Время отправки рассылки: {{newslettersettings.time }}</p>
+                        <p>Текст рассылки: {{newslettersettings.message.newsletter_message }}</p>
+                    <p>
+                        <a href="{% url 'newsletter:mail_list' %}" class="btn btn-warning">Назад</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

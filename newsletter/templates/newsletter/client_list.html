@@ -1,0 +1,34 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+
+    <div class="col-12 mb-5">
+        <a class="btn btn-outline-primary" href="{% url 'newsletter:create_client' %}">Создать нового клиента</a>
+     <p></p>
+    {% for client in client_list %}
+
+        <div class="col">
+            <div class="card shadow-sm">
+
+              <div class="card-body">
+                <p class="card-text">
+                  Имя клиента: {{ client|title }}</p>
+                  <p>Почта клиента: {{ client.client_email }}</p>
+                  <p>Комментарий: {{client.comment}}</p>
+
+                <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                    <a href="{% url 'newsletter:edit_client' client.pk %}" type="button" class="btn btn-sm btn-outline-secondary">Редактировать</a>
+                    <a href="{% url 'newsletter:delete_client' client.pk %}" type="button" class="btn btn-sm btn-outline-secondary">Удалить</a>
+
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    {% endfor %}
+    </div>
+
+
+{% endblock %}
