@@ -199,35 +199,7 @@ class NewsletterSettingsModerationView(LoginRequiredMixin, PermissionRequiredMix
         return reverse_lazy('main:sending_detail', kwargs={'pk': self.object.pk})
 
 
-# def get_context_data(request):
-#     # Получить общее количество рассылок
-#     newslettersettings_count = NewsletterSettings.objects.count()
-#
-#     # Получить количество активных рассылок
-#     active_newslettersettings_count = NewsletterSettings.objects.filter(status='running').count()
-#
-#     # Получить количество клиентов сервиса
-#     clients_count = Client.objects.count()
-#
-#     context = {
-#         'newslettersettings_count': newslettersettings_count,
-#         'active_newslettersettings_count': active_newslettersettings_count,
-#         'clients_count': clients_count,
-#     }
-#
-#     return render(request, 'blog_list.html', context)
 
-class HomepageView(ListView):
-    model = NewsletterSettings
-    template_name = 'mainapp/main/blog_list.html'
 
-    def get_context_data(self, **kwargs):
-        context_data = super().get_context_data(**kwargs)
-        context_data['newslettersettings_count'] = NewsletterSettings.objects.all().count()
-        context_data['active_newslettersettings_count'] = NewsletterSettings.objects.filter(is_active=True).count()
-        blog_list = list(Blog.objects.all())
-        random.shuffle(blog_list)
-        context_data['blog_list'] = blog_list[:3]
-        context_data['clients_count'] = Client.objects.all().count()
-        return context_data
+
 

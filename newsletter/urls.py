@@ -5,8 +5,7 @@ from newsletter.apps import NewsletterConfig
 from newsletter.views import ClientCreateView, ClientListView, ClientDetailView, ClientUpdateView, ClientDeleteView, \
     NewsletterMessageListView, NewsletterMessageDetailView, NewsletterMessageCreateView, NewsletterMessageUpdateView, \
     NewsletterMessageDeleteView, NewsletterSettingsListView, NewsletterSettingsDetailView, NewsletterSettingsCreateView, \
-    NewsletterSettingsUpdateView, NewsletterSettingsDeleteView, NewsletterLogView, NewsletterSettingsModerationView, \
-    HomepageView
+    NewsletterSettingsUpdateView, NewsletterSettingsDeleteView, NewsletterLogView, NewsletterSettingsModerationView
 
 app_name = NewsletterConfig.name
 
@@ -33,7 +32,6 @@ urlpatterns = [
     # path('mail/activity/<int:pk>/', toogle_activity, name='toogle_activity'),
     path('newslettersettings/<int:pk>/newsletterlog/', NewsletterLogView.as_view(), name='newsletterlog_list'),
     path('sending/<int:pk>/moderate', NewsletterSettingsModerationView.as_view(), name='sending_moderation'),
-    path('newslettersettings/', HomepageView.as_view(), name='homepage'),
 ]
 
 

@@ -1,3 +1,5 @@
+from random import random
+
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.db import transaction
@@ -8,6 +10,7 @@ from pytils.translit import slugify
 from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
 
 from mainapp.models import Blog
+from newsletter.models import NewsletterSettings, Client
 
 
 class BlogCreateView(LoginRequiredMixin, CreateView):
@@ -32,8 +35,16 @@ class BlogListView(ListView):
 
     def get_queryset(self, *args, **kwargs):
         queryset = super().get_queryset(*args, **kwargs)
-        # queryset = queryset.filter(blog_is_published=True)
         return queryset
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data['newslettersettings_count'] = NewsletterSettings.objects.all().count()
+        context_data['active_newslettersettings_count'] = NewsletterSettings.objects.filter(is_active=True).count()
+        blog_list = list(Blog.objects.all())
+        context_data['blog_list'] = blog_list[:3]
+        context_data['clients_count'] = Client.objects.all().count()
+        return context_data
 
 
 class BlogDetailView(LoginRequiredMixin, DetailView):

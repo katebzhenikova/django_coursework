@@ -1,3 +1,5 @@
+import os
+
 from django.conf import settings
 
 from pathlib import Path
@@ -72,7 +74,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'course_work',
         'USER': 'postgres',
-        'PASSWORD': '12345',
+        'PASSWORD': 'darling87!',
         'HOST': '127.0.0.1',
         'PORT': 5432,
     }
@@ -134,7 +136,7 @@ LOGIN_URL = 'users/login/'
 EMAIL_HOST = 'smtp.mail.ru'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'katomyr@mail.ru'
-EMAIL_HOST_PASSWORD = 'zu5kT9zhewYC1qRNJiT3'
+EMAIL_HOST_PASSWORD = 'zu5kT9zhewYC1qRNJiT2'
 EMAIL_USE_SSL = True
 
 APSCHEDULER_AUTOSTART = True
@@ -164,3 +166,24 @@ APSCHEDULER_JOBS = {
 }
 
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'katomyr@mail.ru'
+EMAIL_HOST_PASSWORD = 'zu5kT9zhewYC1qRNJiT2'
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+EMAIL_SERVER = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_ADMIN = EMAIL_HOST_USER
+
+
+CACHE_ENABLED = os.getenv("CACHE_ENABLED") == 'True'
+
+if CACHE_ENABLED:
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.redis.RedisCache",
+            "LOCATION": os.getenv("CACHE_LOCATION"),
+        }
+    }
