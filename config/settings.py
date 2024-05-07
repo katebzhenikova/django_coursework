@@ -153,19 +153,6 @@ APSCHEDULER_DATABASES = {
         'HOST': os.getenv('DB_HOST'),
     }
 }
-APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
-NEWSLETTER_FREQUENCY = "раз в день"
-
-# Настройка расписания для отправки рассылок
-# APSCHEDULER_JOBS = {
-#     'send_newsletter': {
-#         'interval': settings.NEWSLETTER_FREQUENCY,  # Периодичность рассылки
-#         'args': [],
-#         'kwargs': {},
-#         'function': 'path.to.run_newsletters',  # Функция, которая будет вызываться для отправки рассылки
-#     },
-# }
-
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.mail.ru'
@@ -188,3 +175,24 @@ if CACHE_ENABLED:
             "LOCATION": os.getenv("CACHE_LOCATION"),
         }
     }
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': '/path/django_coursework_new/logs/django.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
+
