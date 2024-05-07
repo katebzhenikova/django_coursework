@@ -3,6 +3,8 @@ import os
 from django.conf import settings
 
 from pathlib import Path
+from dotenv import load_dotenv
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -151,19 +153,18 @@ APSCHEDULER_DATABASES = {
         'HOST': os.getenv('DB_HOST'),
     }
 }
-
 APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
 NEWSLETTER_FREQUENCY = "раз в день"
 
 # Настройка расписания для отправки рассылок
-APSCHEDULER_JOBS = {
-    'send_newsletter': {
-        'interval': settings.NEWSLETTER_FREQUENCY,  # Периодичность рассылки
-        'args': [],
-        'kwargs': {},
-        'function': 'path.to.run_newsletters',  # Функция, которая будет вызываться для отправки рассылки
-    },
-}
+# APSCHEDULER_JOBS = {
+#     'send_newsletter': {
+#         'interval': settings.NEWSLETTER_FREQUENCY,  # Периодичность рассылки
+#         'args': [],
+#         'kwargs': {},
+#         'function': 'path.to.run_newsletters',  # Функция, которая будет вызываться для отправки рассылки
+#     },
+# }
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

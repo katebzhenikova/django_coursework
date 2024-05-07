@@ -7,3 +7,5 @@ pillow
 django-apscheduler
 pytz
 redis
+python-dotenv
+
