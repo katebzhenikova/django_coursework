@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from newsletter.models import Client, NewsletterLog, NewsletterMessage, NewsletterSettings
+
+admin.site.register(Client)
+admin.site.register(NewsletterLog)
+admin.site.register(NewsletterMessage)
+admin.site.register(NewsletterSettings)

@@ -1,13 +1,14 @@
 from django.conf import settings
+
 from django.db import models
 from django.utils import timezone
 import pytz
 from datetime import datetime, timedelta
 
-from mainapp.models import NULLABLE
+from config import settings
 
-zone = pytz.timezone(settings.TIME_ZONE)
-current_datetime = datetime.now(zone)
+NULLABLE = {'null': True, 'blank': True}
+
 
 
 class Client(models.Model):
@@ -48,7 +49,7 @@ class NewsletterSettings(models.Model):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, **NULLABLE, verbose_name='автор')
 
     start_at = models.DateTimeField(default=datetime.now(), verbose_name='дата начала')
-    finish_at = models.DateTimeField(default=current_datetime + timedelta(days=30), verbose_name='дата окончания')
+    finish_at = models.DateTimeField(default=timezone.now() + timedelta(days=30), verbose_name='дата окончания')
     is_active = models.BooleanField(default=True, verbose_name='активна')
 
     def __str__(self):
@@ -56,6 +57,14 @@ class NewsletterSettings(models.Model):
 
     class Meta:
         verbose_name = 'Рассылка'
+        verbose_name_plural = 'Рассылки'
+
+        permissions = [
+            (
+                'set_status',
+                'Can change status'
+            )
+        ]
 
 
 class NewsletterLog(models.Model):

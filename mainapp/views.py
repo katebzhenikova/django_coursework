@@ -9,13 +9,14 @@ from django.urls import reverse_lazy, reverse
 from pytils.translit import slugify
 from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
 
+from mainapp.forms import BlogForm
 from mainapp.models import Blog
 from newsletter.models import NewsletterSettings, Client
 
 
 class BlogCreateView(LoginRequiredMixin, CreateView):
     model = Blog
-    fields = ('blog_title', 'description', 'blog_image')
+    form_class = BlogForm
     success_url = reverse_lazy('mainapp:blog_list')
     template_name = 'main/blog_form.html'
 
@@ -29,7 +30,7 @@ class BlogCreateView(LoginRequiredMixin, CreateView):
 
 class BlogListView(ListView):
     model = Blog
-    fields = ('blog_title', 'description', 'blog_image')
+    form_class = BlogForm
     success_url = reverse_lazy('mainapp:blog_list')
     template_name = 'main/blog_list.html'
 
@@ -49,7 +50,7 @@ class BlogListView(ListView):
 
 class BlogDetailView(LoginRequiredMixin, DetailView):
     model = Blog
-    fields = ('blog_title', 'description', 'blog_image')
+    form_class = BlogForm
     success_url = reverse_lazy('mainapp:blog_detail')
     template_name = 'main/blog_detail.html'
 
@@ -62,7 +63,7 @@ class BlogDetailView(LoginRequiredMixin, DetailView):
 
 class BlogUpdateView(LoginRequiredMixin, UpdateView):
     model = Blog
-    fields = ('blog_title', 'description', 'blog_image')
+    form_class = BlogForm
     template_name = 'main/blog_form.html'
 
     def form_valid(self, form):
@@ -78,7 +79,7 @@ class BlogUpdateView(LoginRequiredMixin, UpdateView):
 
 class BlogDeleteView(DeleteView):
     model = Blog
-    fields = ('blog_title', 'description', 'blog_image')
+    form_class = BlogForm
     success_url = reverse_lazy('mainapp:blog_list')
     template_name = 'main/blog_confirm_delete.html'
 

@@ -1,13 +1,15 @@
 {% extends 'main/base.html' %}
 
 {% block content %}
-
-
+    {% if not user.is_superuser or not user.is_staff %}
     <div class="col-12 mb-5">
         <a class="btn btn-outline-primary" href="{% url 'newsletter:create_mail' %}">Создать новую рассылку</a>
         <a class="btn btn-outline-primary" href="{% url 'newsletter:client_list' %}">Ваши Клиенты</a>
         <a class="btn btn-outline-primary" href="{% url 'newsletter:newslettermessage_list' %}">Ваши сообщения для рассылки</a>
+        <a class="btn btn-outline-primary" href="{% url 'newsletter:log_list' %}">История ваших рассылок</a>
      <p></p>
+
+    {% endif %}
         <span class="fw-bold">Ваши рассылки</span>
      </p>
 

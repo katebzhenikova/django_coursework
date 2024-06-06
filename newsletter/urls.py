@@ -1,11 +1,12 @@
 from django.urls import path
+from django.views.decorators.cache import cache_page
 
 from newsletter import views
 from newsletter.apps import NewsletterConfig
 from newsletter.views import ClientCreateView, ClientListView, ClientDetailView, ClientUpdateView, ClientDeleteView, \
     NewsletterMessageListView, NewsletterMessageDetailView, NewsletterMessageCreateView, NewsletterMessageUpdateView, \
     NewsletterMessageDeleteView, NewsletterSettingsListView, NewsletterSettingsDetailView, NewsletterSettingsCreateView, \
-    NewsletterSettingsUpdateView, NewsletterSettingsDeleteView, NewsletterLogView, NewsletterSettingsModerationView
+    NewsletterSettingsUpdateView, NewsletterSettingsDeleteView, NewsletterLogListView
 
 app_name = NewsletterConfig.name
 
@@ -24,14 +25,13 @@ urlpatterns = [
     path('newslettermessage/edit/<int:pk>/', NewsletterMessageUpdateView.as_view(), name='edit_newslettermessage'),
     path('newslettermessage/delete/<int:pk>/', NewsletterMessageDeleteView.as_view(), name='delete_newslettermessage'),
 
-    path('newslettersettings/', NewsletterSettingsListView.as_view(), name='mail_list'),
+    path('newslettersettings/', cache_page(60)(NewsletterSettingsListView.as_view()), name='mail_list'),
     path('newslettersettings/view/<int:pk>/', NewsletterSettingsDetailView.as_view(), name='view_mail'),
     path('newslettersettings/create/', NewsletterSettingsCreateView.as_view(), name='create_mail'),
     path('newslettersettings/edit/<int:pk>/', NewsletterSettingsUpdateView.as_view(), name='edit_mail'),
     path('newslettersettings/delete/<int:pk>/', NewsletterSettingsDeleteView.as_view(), name='delete_mail'),
-    # path('mail/activity/<int:pk>/', toogle_activity, name='toogle_activity'),
-    path('newslettersettings/<int:pk>/newsletterlog/', NewsletterLogView.as_view(), name='newsletterlog_list'),
-    path('sending/<int:pk>/moderate', NewsletterSettingsModerationView.as_view(), name='sending_moderation'),
+
+    path('log_list', cache_page(60)(NewsletterLogListView.as_view()), name='log_list'),
 ]
 
 

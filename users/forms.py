@@ -14,7 +14,7 @@ class UserRegisterForm(StyleFormMixin, UserCreationForm):
 class UserProfileForm(StyleFormMixin, UserChangeForm):
     class Meta:
         model = User
-        fields = ('email', 'first_name', 'last_name', 'phone', 'avatar',)
+        fields = ('email', 'password', 'first_name', 'last_name', 'phone', 'avatar',)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -22,3 +22,7 @@ class UserProfileForm(StyleFormMixin, UserChangeForm):
         self.fields['password'].widget = forms.HiddenInput()
 
 
+class UserListForm(StyleFormMixin, forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('email', 'phone')

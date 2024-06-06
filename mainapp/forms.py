@@ -14,7 +14,7 @@ class StyleFormMixin:
 class BlogForm(forms.ModelForm, StyleFormMixin):
     class Meta:
         model = Blog
-        fields = '__all__'
-        # fields = ('product_name', 'description', 'product_price', 'product_image',)
+        # fields = '__all__'
+        fields = ('blog_title', 'description', 'blog_image', 'blog_date', 'blog_is_published')
         #exclude = ('product_user', )
 
