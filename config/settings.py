@@ -148,8 +148,8 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 EMAIL_ADMIN = EMAIL_HOST_USER
 
 
-# APSCHEDULER_AUTOSTART = True
-#
+APSCHEDULER_AUTOSTART = True
+
 # APSCHEDULER_DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
