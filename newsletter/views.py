@@ -19,11 +19,6 @@ class ClientCreateView(LoginRequiredMixin, CreateView):
     template_name = 'newsletter/client_form.html'
 
     def form_valid(self, form):
-        if form.is_valid():
-            new_client = form.save()
-            new_client.save()
-        return super().form_valid(form)
-    def form_valid(self, form):
         newsletter_settings = form.save(commit=False)  # Сохраняем форму без коммита в базу данных
         newsletter_settings.owner = self.request.user  # Устанавливаем владельца рассылки равным текущему пользователю
         newsletter_settings.save()  # Сохраняем изменения в базу данных
