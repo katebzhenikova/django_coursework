@@ -25,7 +25,6 @@ class ClientCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-
 class ClientUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Client
     form_class = ClientForm
@@ -113,8 +112,6 @@ class NewsletterMessageCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-
-
 class NewsletterMessageUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = NewsletterMessage
     form_class = NewsletterMessageForm
@@ -137,7 +134,6 @@ class NewsletterMessageListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return super().get_queryset().filter(owner=self.request.user)
-
 
 
 class NewsletterMessageDetailView(LoginRequiredMixin, DetailView):
@@ -183,6 +179,7 @@ class NewsletterSettingsCreateView(LoginRequiredMixin, CreateView):
         form.instance.owner = self.request.user
         return super(NewsletterSettingsCreateView, self).form_valid(form)
 
+
 class NewsletterSettingsUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = NewsletterSettings
     form_class = NewsletterSettingsForm
@@ -202,6 +199,7 @@ class NewsletterSettingsUpdateView(LoginRequiredMixin, UserPassesTestMixin, Upda
 class NewsletterSettingsListView(LoginRequiredMixin, ListView):
     model = NewsletterSettings
     template_name = 'newsletter/mail_list.html'
+
     def get_form_class(self):
         return super().get_form_class()
 
@@ -209,7 +207,6 @@ class NewsletterSettingsListView(LoginRequiredMixin, ListView):
         if self.request.user.has_perm('newslettersettings.view_newslettersettings'):
             return super().get_queryset()
         return super().get_queryset().filter(owner=self.request.user)
-
 
 
 class NewsletterSettingsDetailView(LoginRequiredMixin, DetailView):
