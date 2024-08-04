@@ -1,3 +1,4 @@
+from dateutil.relativedelta import relativedelta
 from django.conf import settings
 
 from django.db import models
@@ -8,7 +9,6 @@ from datetime import datetime, timedelta
 from config import settings
 
 NULLABLE = {'null': True, 'blank': True}
-
 
 
 class Client(models.Model):
@@ -49,7 +49,7 @@ class NewsletterSettings(models.Model):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, **NULLABLE, verbose_name='автор')
 
     start_at = models.DateTimeField(default=datetime.now(), verbose_name='дата начала')
-    finish_at = models.DateTimeField(default=timezone.now() + timedelta(days=30), verbose_name='дата окончания')
+    finish_at = models.DateTimeField(default=timezone.now() + relativedelta(months=1), verbose_name='дата окончания')
     is_active = models.BooleanField(default=True, verbose_name='активна')
 
     def __str__(self):
