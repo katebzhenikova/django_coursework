@@ -136,36 +136,34 @@ LOGIN_URL = 'users/login/'
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
 EMAIL_HOST = 'smtp.mail.ru'
 EMAIL_PORT = 465
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-EMAIL_SERVER = EMAIL_HOST_USER
+
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 EMAIL_ADMIN = EMAIL_HOST_USER
 
-
 APSCHEDULER_AUTOSTART = True
 
-# APSCHEDULER_DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': os.getenv('DB_NAME'),
-#         'USER': os.getenv('DB_USER'),
-#         'PASSWORD': os.getenv('DB_PASSWORD'),
-#         'PORT': os.getenv('DB_PORT'),
-#         'HOST': os.getenv('DB_HOST'),
-#     }
-# }
-#
-# APSCHEDULER_SETTINGS = {
-#     'apscheduler.jobstores.default': {
-#         'class': 'django_apscheduler.jobstores:DjangoJobStore'
-#     },
-# }
+APSCHEDULER_DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'PORT': os.getenv('DB_PORT'),
+        'HOST': os.getenv('DB_HOST'),
+    }
+}
+
+APSCHEDULER_SETTINGS = {
+    'apscheduler.jobstores.default': {
+        'class': 'django_apscheduler.jobstores:DjangoJobStore'
+    },
+}
 
 CACHE_ENABLED = os.getenv("CACHE_ENABLED") == 'True'
 
@@ -178,22 +176,22 @@ if CACHE_ENABLED:
     }
 
 
-# LOGGING = {
-#     'version': 1,
-#     'disable_existing_loggers': False,
-#     'handlers': {
-#         'file': {
-#             'level': 'DEBUG',
-#             'class': 'logging.FileHandler',
-#             'filename': 'logs/django.log',
-#         },
-#     },
-#     'loggers': {
-#         'django': {
-#             'handlers': ['file'],
-#             'level': 'DEBUG',
-#             'propagate': True,
-#         },
-#     },
-# }
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'logs/django.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
 
