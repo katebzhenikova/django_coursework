@@ -17,6 +17,7 @@ def send_letter(newsletter_settings_id):
     # Получаем настройки рассылки по ID
     try:
         newsletter = NewsletterSettings.objects.get(id=newsletter_settings_id)
+        logger.info(f"Retrieved newsletter settings for id {newsletter_settings_id}")
     except NewsletterSettings.DoesNotExist:
         logger.error(f"NewsletterSettings with id {newsletter_settings_id} does not exist.")
         return
