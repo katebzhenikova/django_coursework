@@ -68,7 +68,7 @@ def start_scheduler():
     scheduler = BackgroundScheduler()
 
     if not scheduler.get_jobs():
-        scheduler.add_job(send_newsletter_periodic, 'interval', seconds=3600)
+        scheduler.add_job(send_newsletter_periodic, 'interval', minutes=1)
 
     if not scheduler.running:
         scheduler.start()
